@@ -2,41 +2,18 @@ import Delays from './Delays';
 import FileSource from "@/components/FileSource";
 export const revalidate=0;
 
-// FileSource is included manually here because the page is dynamic and when deployed
-// on Vercel, it doesn't copy the original js files to the deployment. So it can't
-// read the js file source at run-time. I couldn't find a way around this.
 export default ()=>{
   return <>
     <h2>async Server Components</h2>
     <p>Server Components can be async, so they return a Promise. When rendering, RSC will wait for all Promises to resolve before returning the html content or Virtual DOM back to the browser. This is what caused the delay in the delivery of the content of this page. Reload to see how long it takes to return.</p>
 
     <p>Below you can see a simple &lt;Delay&gt; Server Component:</p>
-    <FileSource title={"Delay.js"}>
-{'export default async function Delay({seconds=1,children}) {\n' +
-    '  return new Promise((resolve)=>{\n' +
-    '    setTimeout(()=>resolve(\n' +
-    '        <div className={"box"}>\n' +
-    '          Render Timestamp: {Date.now()}\n' +
-    '          {children}\n' +
-    '        </div>\n' +
-    '    ),seconds*1000);\n' +
-    '  });\n' +
-    '}\n'}
-    </FileSource>
+    <FileSource title={"Delay.js"} filepath={"/app/server-components/Delay.js"}/>
     <p>This component creates a Promise that waits a certain number of seconds before resolving to a simple DIV with a timestamp showing when it rendered. If the component has children, they are then rendered.</p>
 
     <p>And below is the output of multiple instances of this Component, some nested and some not:</p>
     <Delays/>
-    <FileSource title={"JSX"}>{'import Delay from "../Delay";\n' +
-        'export default () => <>\n' +
-        '  <Delay seconds={1}/>\n' +
-        '  <Delay seconds={1}/>\n' +
-        '  <Delay seconds={1}>\n' +
-        '    <Delay seconds={.5}>\n' +
-        '      <Delay seconds={.5}/>\n' +
-        '    </Delay>\n' +
-        '  </Delay>\n' +
-        '</>\n'}</FileSource>
+    <FileSource title={"Delays.js"} filepath={"/app/server-components/async/Delays.js"}/>
     <p>Notice how the first 3 timestamps are either exactly or nearly identical. This demonstrates that async RSCs are rendered in parallel.</p>
     <p>The nested components, however, have increasing timestamps. This is because the outer Delay resolved after 1 second. At that point, it rendered its children. Its child was another Delay component with a delay of 0.5 seconds. Once that time elapses, it renders and again calls its children to render. This is a third Delay component, with a delay of 0.5 seconds.</p>
     <p>The nested components demonstrate that waterfalls can be created in Server Components, where the inner components do not begin their async operations until their parent is actually rendered.</p>

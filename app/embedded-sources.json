@@ -1,0 +1,4 @@
+{
+  "app/server-components/Delay.js": "export default async function Delay({seconds=1,children}) {\n  return new Promise((resolve)=>{\n    setTimeout(()=>resolve(\n        <div className={\"box\"}>\n          Render Timestamp: {Date.now()}\n          {children}\n        </div>\n    ),seconds*1000);\n  });\n}\n",
+  "app/server-components/async/Delays.js": "import Delay from \"../Delay\";\nexport default () => <>\n  <Delay seconds={1}/>\n  <Delay seconds={1}/>\n  <Delay seconds={1}>\n    <Delay seconds={.5}>\n      <Delay seconds={.5}/>\n    </Delay>\n  </Delay>\n</>\n"
+}

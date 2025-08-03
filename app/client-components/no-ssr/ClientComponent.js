@@ -6,7 +6,7 @@ export default ()=>{
   useEffect(setServer,[]);
 
   return (
-      <p class={"client-component"}>
+      <p className={"client-component"}>
         This content is generated client-side. Datestamp: {isServer ? '' : Date.now()}
       </p>
   );

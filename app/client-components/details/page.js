@@ -64,7 +64,7 @@ export default ()=><>
     <dt>Can I import() a Client Component into an RSC?</dt>
     <dd>Yes. As previously covered, that just tells the bundler to bundle the Client Component source separately and send it to the browser for execution.</dd>
 
-    <dt>Can an Server Component be a child of a Client Component?</dt>
+    <dt>Can a Server Component be a child of a Client Component?</dt>
     <dd>Yes. We will explore this next. The reason is because the RSC's output can be treated as static input to the {"{children}"} prop of the Client Component. It doesn't know or care whether its children content was static, rendered on the server, or rendered on the client.</dd>
 
     <dt>Can a Server Component's output be passed as a prop to a Client Component?</dt>

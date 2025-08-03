@@ -44,7 +44,7 @@ export default ()=><>
 
   <h3>Hydration</h3>
   <p>As React reconciles the DOM created from the static html with its Virtual DOM, it recognizes that part of the static DOM was SSR output from a Client Component. It knows this because the $L[id] reference in the Virtual DOM is in place of the html in the static DOM.</p>
-  <p>At this point, React renders the Client Component. The resulting Client Component html is inserted into the DOM where the static html is currently.</p>
+  <p>At this point, React renders the Client Component. The resulting Client Component html is then inserted into the DOM, replacing the existing static content.</p>
   <p>This is called Hydration - turning static SSR html into dynamic client-side (CSR) html.</p>
 
   <h3>Current Mental Model</h3>
